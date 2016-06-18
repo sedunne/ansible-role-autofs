@@ -1,0 +1,14 @@
+---
+autofs_package_name: 'autofs'
+autofs_package_state: 'present'
+autofs_service_name: 'autofs'
+
+autofs_create_master_backup: 'yes'
+autofs_allow_browse: True
+
+autofs_conf_file: '/etc/autofs.conf'
+autofs_master_file: '/etc/auto.master'
+autofs_dyn_dir: '/etc/auto.master.d'
+autofs_owner: 'root'
+autofs_group: 'root'
+autofs_mode: '0644'

@@ -1,0 +1,26 @@
+---
+- name: ensure dynamic master directory is used
+  lineinfile:
+    dest: "{{ autofs_master_file }}"
+    line: "+dir:{{ autofs_dyn_dir }}"
+    backup: "{{ autofs_create_master_backup }}"
+  notify:
+    - restart autofs
+  tags:
+    - autofs
+    - autofs_master_config
+
+- name: create defined master files
+  template:
+    dest: "{{ autofs_dyn_dir }}/{{ item.key }}"
+    src: master.j2
+    owner: "{{ autofs_owner }}"
+    group: "{{ autofs_group }}"
+    mode: "{{ autofs_mode }}"
+  with_dict: "{{ autofs_masters }}"
+  when: (autofs_masters is defined)
+  notify:
+    - restart autofs
+  tags:
+    - autofs
+    - autofs_master_templates

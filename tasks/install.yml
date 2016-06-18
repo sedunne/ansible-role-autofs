@@ -1,0 +1,16 @@
+---
+- name: ensure autofs package
+  package:
+    name: "{{ autofs_package_name }}"
+    state: "{{ autofs_package_state }}"
+  tags:
+    - autofs
+    - autofs_install
+
+- name: start and enable autofs service
+  service:
+    name: "{{ autofs_service_name }}"
+    state: started
+  tags:
+    - autofs
+    - autofs_install

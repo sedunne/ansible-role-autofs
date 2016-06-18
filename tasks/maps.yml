@@ -1,0 +1,15 @@
+---
+- name: create defined map files
+  template:
+    dest: "{{ item.value.path }}/{{ item.key }}"
+    src: maps.j2
+    owner: "{{ autofs_owner }}"
+    group: "{{ autofs_group }}"
+    mode: "{{ autofs_mode }}"
+  with_dict: "{{ autofs_maps }}"
+  when: (autofs_maps is defined)
+  notify:
+    - restart autofs
+  tags:
+    - autofs
+    - autofs_map_templates

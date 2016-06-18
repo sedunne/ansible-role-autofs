@@ -1,0 +1,3 @@
+# {{ ansible_managed }}
+
+{{ item.value.mount_point }} {{ item.value.map_type|default('') }}{% if item.value.map_format is defined %},{% endif %}{{ item.value.map_format|default('') }}{% if item.value.map_type is defined %}:{% endif %}{{ item.value.map_name }} {{ item.value.options|default('') }}

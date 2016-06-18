@@ -1,0 +1,13 @@
+---
+- name: allow browseable by default
+  lineinfile:
+    state: present
+    backrefs: yes
+    regexp: ^#?browse_mode = no
+    line: browse_mode = yes
+    dest: "{{ autofs_conf_file }}"
+  when: "{{ autofs_allow_browse == True }}"
+  notify: restart autofs
+  tags:
+    - autofs
+    - autofs_config
