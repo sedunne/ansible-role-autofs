@@ -10,6 +10,12 @@
     - autofs
     - autofs_master_config
 
+- name: ensure dynamic master directory exists
+  file:
+    path: "{{ autofs_dyn_dir }}"
+    state: directory
+    mode: 0755
+
 - name: create defined master files
   template:
     dest: "{{ autofs_dyn_dir }}/{{ item.key }}"
